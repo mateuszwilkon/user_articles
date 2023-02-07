@@ -5,6 +5,7 @@ import 'package:user_articles/app/incjection_container.dart';
 import 'package:user_articles/domain/models/article_model.dart';
 import 'package:user_articles/domain/models/author_model.dart';
 import 'package:user_articles/features/articles/cubit/articles_cubit.dart';
+import 'package:user_articles/features/read/page/read_page.dart';
 
 class ArticlesPage extends StatelessWidget {
   const ArticlesPage({
@@ -96,7 +97,10 @@ class _ArticleItemWidget extends StatelessWidget {
         vertical: 10,
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {Navigator.of(context).push(MaterialPageRoute(builder:(_) => const ReadPage(),
+              )
+            );
+          },
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
