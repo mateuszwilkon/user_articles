@@ -97,7 +97,7 @@ class _ArticleItemWidget extends StatelessWidget {
         vertical: 10,
       ),
       child: InkWell(
-        onTap: () {Navigator.of(context).push(MaterialPageRoute(builder:(_) => const ReadPage(),
+        onTap: () {Navigator.of(context).push(MaterialPageRoute(builder:(_) =>  ReadPage(article: model,),
               )
             );
           },

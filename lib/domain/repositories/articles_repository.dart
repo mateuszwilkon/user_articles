@@ -11,4 +11,8 @@ class ArticlesRepository {
     final allArticles = await remoteDataSource.getArticles();
     return allArticles.where((article) => article.authorId == authorId).toList();
   }
+  Future<List<ArticleModel>> getArticleForId(int id) async {
+    final allArticles = await remoteDataSource.getArticles();
+    return allArticles.where((article) => article.id == id).toList();
+  }
 }

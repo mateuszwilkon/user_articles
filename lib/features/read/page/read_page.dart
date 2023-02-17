@@ -1,42 +1,68 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:user_articles/app/incjection_container.dart';
+import 'package:user_articles/domain/models/article_model.dart';
+import 'package:user_articles/features/articles/cubit/articles_cubit.dart';
+import 'package:user_articles/features/read/cubit/read_cubit.dart';
 
 class ReadPage extends StatelessWidget {
   const ReadPage({
-    Key? key,
+    Key? key, required this.article,
   }) : super(key: key);
 
+  final ArticleModel article;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('title')
-      ),
-      body:
-      Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children:  [
-              const SizedBox(height: 60,),
-              Text('title',
-              style: GoogleFonts.itim(
-              fontSize: 35,
+      appBar: AppBar(title: const Text('title')),
+      body: BlocProvider<ReadCubit>(
+        create: (context) => getIt(
+        )..fetchData(id: article.id),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 60,
               ),
-
+               CircleAvatar(
+                radius: 60,
+                backgroundImage: NetworkImage(
+                    article.picture),
               ),
-              const SizedBox(height: 40,),
-              const CircleAvatar(radius: 60,
-                backgroundImage: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Henryk_Grynberg_Czwartek_na_Tłomackiem_Żydowski_Instytut_Historyczny_2016d.jpg/440px-Henryk_Grynberg_Czwartek_na_Tłomackiem_Żydowski_Instytut_Historyczny_2016d.jpg'),
+              const SizedBox(
+                height: 40,
+              ),
+              Text(
+                article.title,
+                style: GoogleFonts.itim(
+                  fontSize: 35,
                 ),
-             Container(child:
-             
-              const Text('Opowiadanie stanowi jedną z najczęściej wybieranych przez uczniów form wypracowań. Dzieje się tak dlatego, że uważane jest za formę najłatwiejszą. Na ten pogląd ma wpływ luźna przeważnie struktura tej wypowiedzi oraz fakt, że opowiadający (narrator) sam decyduje, które elementy opowiadania podać szerzej, które tylko zasygnalizować, a których w ogóle nie uwzględniać.W opowiadaniu nie zawsze trzeba ściśle trzymać się układu chronologicznego zdarzeń, można też odstąpić od prawdy, dając ujście swej fantazji i marzeniom. Często wśród tematów wypracowań klasowych znajdują się opowiadania na rozmaite tematy – tak zwane „tematy wolne”. '))
-          ],
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  color: Colors.black12,
+                  child:  Text(
+                      article.content),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      
-
-
     );
   }
 }
